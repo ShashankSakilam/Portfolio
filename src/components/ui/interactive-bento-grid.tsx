@@ -28,7 +28,7 @@ export function CardBody({ className, ...props }: CardProps) {
     <div
       role="group"
       className={cn(
-  "relative z-30 flex flex-col border-t border-gray-200 p-4 md:p-6",
+        "flex flex-col border-t border-gray-200 p-4 md:p-6",
         className
       )}
       {...props}

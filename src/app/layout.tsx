@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${manrope.variable} font-sans antialiased overflow-x-hidden`}
+        className={`${manrope.variable} font-sans antialiased`}
         style={{ scrollBehavior: 'smooth' }}
       >
         <LiquidGlassNavbar />

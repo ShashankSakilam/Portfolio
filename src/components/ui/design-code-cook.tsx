@@ -64,14 +64,9 @@ function DesignCodeCookComponent() {
           Cook!!
         </span>
 
-        {/* Third line - Cook!! with slider (hidden on small screens) */}
+        {/* Third line - Cook!! with slider */}
         <div className="flex justify-center gap-2 sm:gap-4 mt-3 md:mt-4">
-          <div className="hidden sm:block">
-            <DesignSlider width={textWidth} />
-          </div>
-          <div className="block sm:hidden text-center">
-            <h3 className="font-bold text-2xl">Cook!!</h3>
-          </div>
+          <DesignSlider width={textWidth} />
         </div>
       </div>
     </div>
