@@ -11,11 +11,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Shashank Sakilam",
+  title: "Portfolio - Modern Web Developer",
   description: "A modern portfolio showcasing web development skills with Next.js, TypeScript, and cutting-edge UI libraries",
-  icons: {
-    icon: "/Favicon.png", // This is the line you add
-  },
 };
 
 export default function RootLayout({
@@ -26,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${manrope.variable} font-sans antialiased`}
+        className={`${manrope.variable} font-sans antialiased overflow-x-hidden`}
         style={{ scrollBehavior: 'smooth' }}
       >
         <LiquidGlassNavbar />

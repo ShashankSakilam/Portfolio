@@ -58,9 +58,17 @@ function TitleComponent() {
           Stop Looking at me 😜 !
         </span>
 
-        {/* Range‑slider container */}
+        {/* Range‑slider container - complex slider hidden on small screens */}
         <div className="flex justify-center gap-2 sm:gap-4 mt-4 md:mt-6">
-          <OpenSourceSlider width={textWidth} />
+          <div className="hidden sm:block">
+            <OpenSourceSlider width={textWidth} />
+          </div>
+          {/* Mobile fallback - simple underlined text to avoid misalignment */}
+          <div className="block sm:hidden">
+            <div className="bg-white/0 px-2 py-3 rounded-md">
+              <span className="font-bold text-lg">Stop Looking at me 😜 !</span>
+            </div>
+          </div>
         </div>
 
         {/* Subheading */}

@@ -28,7 +28,7 @@ export function CardBody({ className, ...props }: CardProps) {
     <div
       role="group"
       className={cn(
-        "flex flex-col border-t border-gray-200 p-4 md:p-6",
+  "relative z-30 flex flex-col border-t border-gray-200 p-4 md:p-6",
         className
       )}
       {...props}
@@ -135,22 +135,17 @@ const CreatorPulseVisual: React.FC<VisualProps> = ({
   const [hovered, setHovered] = useState(false)
 
   const techItems = [
-    { id: 1, translateX: "120", translateY: "60", text: "React", icon: "⚛️" },
-    { id: 2, translateX: "120", translateY: "-60", text: "Next.js", icon: "🔷" },
-    { id: 3, translateX: "140", translateY: "0", text: "Supabase", icon: "🗄️" },
-    { id: 4, translateX: "-140", translateY: "0", text: "OpenAI", icon: "🤖" },
-    { id: 5, translateX: "-120", translateY: "60", text: "Firecrawl", icon: "🔥" },
-    { id: 6, translateX: "-120", translateY: "-60", text: "ShadCN UI", icon: "🎨" },
+    { id: 1, translateX: 120, translateY: 60, text: "React", icon: "⚛️" },
+    { id: 2, translateX: 120, translateY: -60, text: "Next.js", icon: "🔷" },
+    { id: 3, translateX: 140, translateY: 0, text: "Supabase", icon: "🗄️" },
+    { id: 4, translateX: -140, translateY: 0, text: "OpenAI", icon: "🤖" },
+    { id: 5, translateX: -120, translateY: 60, text: "Firecrawl", icon: "🔥" },
+    { id: 6, translateX: -120, translateY: -60, text: "ShadCN UI", icon: "🎨" },
   ]
 
   return (
     <>
-      <div
-        className="absolute inset-0 z-20"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      />
-      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl">
+      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
         {/* Writing Animation */}
         <div className="absolute inset-0 z-[6] flex items-center justify-center">
           <div className="relative">
@@ -200,7 +195,7 @@ const CreatorPulseVisual: React.FC<VisualProps> = ({
 
         <EllipseGradient color={mainColor} />
         <GridLayer color={gridColor} />
-      </div>
+  </div>
     </>
   )
 }
@@ -214,21 +209,16 @@ const FaceRecognitionVisual: React.FC<VisualProps> = ({
   const [hovered, setHovered] = useState(false)
 
   const techItems = [
-    { id: 1, translateX: "120", translateY: "60", text: "Python", icon: "🐍" },
-    { id: 2, translateX: "120", translateY: "-60", text: "OpenCV", icon: "📷" },
-    { id: 3, translateX: "140", translateY: "0", text: "TensorFlow", icon: "🧠" },
-    { id: 4, translateX: "-140", translateY: "0", text: "Tkinter", icon: "🖥️" },
-    { id: 5, translateX: "-120", translateY: "60", text: "CNNs", icon: "🔍" },
+    { id: 1, translateX: 120, translateY: 60, text: "Python", icon: "🐍" },
+    { id: 2, translateX: 120, translateY: -60, text: "OpenCV", icon: "📷" },
+    { id: 3, translateX: 140, translateY: 0, text: "TensorFlow", icon: "🧠" },
+    { id: 4, translateX: -140, translateY: 0, text: "Tkinter", icon: "🖥️" },
+    { id: 5, translateX: -120, translateY: 60, text: "CNNs", icon: "🔍" },
   ]
 
   return (
     <>
-      <div
-        className="absolute inset-0 z-20"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      />
-      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl">
+      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
         {/* Face with detection boxes */}
         <div className="absolute inset-0 z-[6] flex items-center justify-center">
           <div className="relative">
@@ -285,7 +275,7 @@ const FaceRecognitionVisual: React.FC<VisualProps> = ({
 
         <EllipseGradient color={mainColor} />
         <GridLayer color={gridColor} />
-      </div>
+  </div>
     </>
   )
 }
@@ -299,21 +289,16 @@ const RAGChatbotVisual: React.FC<VisualProps> = ({
   const [hovered, setHovered] = useState(false)
 
   const techItems = [
-    { id: 1, translateX: "120", translateY: "60", text: "Python", icon: "🐍" },
-    { id: 2, translateX: "120", translateY: "-60", text: "Gemini Pro", icon: "💎" },
-    { id: 3, translateX: "140", translateY: "0", text: "LangChain", icon: "🔗" },
-    { id: 4, translateX: "-140", translateY: "0", text: "FAISS", icon: "📊" },
-    { id: 5, translateX: "-120", translateY: "60", text: "Streamlit", icon: "🌊" },
+    { id: 1, translateX: 120, translateY: 60, text: "Python", icon: "🐍" },
+    { id: 2, translateX: 120, translateY: -60, text: "Gemini Pro", icon: "💎" },
+    { id: 3, translateX: 140, translateY: 0, text: "LangChain", icon: "🔗" },
+    { id: 4, translateX: -140, translateY: 0, text: "FAISS", icon: "📊" },
+    { id: 5, translateX: -120, translateY: 60, text: "Streamlit", icon: "🌊" },
   ]
 
   return (
     <>
-      <div
-        className="absolute inset-0 z-20"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      />
-      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl">
+      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
         {/* Chat Interface */}
         <div className="absolute inset-0 z-[6] flex items-center justify-center">
           <div className="bg-white/90 dark:bg-black/90 rounded-lg p-3 md:p-4 w-full max-w-xs md:max-w-sm mx-2 md:mx-0 shadow-lg">
@@ -382,7 +367,7 @@ const RAGChatbotVisual: React.FC<VisualProps> = ({
 
         <EllipseGradient color={mainColor} />
         <GridLayer color={gridColor} />
-      </div>
+  </div>
     </>
   )
 }
@@ -440,7 +425,7 @@ export default function InteractiveProjectsGrid() {
       technologies: ['React', 'TypeScript', 'Next.js', 'Supabase', 'OpenAI', 'Firecrawl', 'ShadCN UI'],
       visual: <CreatorPulseVisual />,
       actions: [
-        { text: 'Live Link', variant: 'live', href: '#' },
+  { text: 'Live Link', variant: 'live', href: 'https://100x-capstone-creatorpulse.vercel.app/' },
       ]
     },
     {
@@ -450,7 +435,7 @@ export default function InteractiveProjectsGrid() {
       technologies: ['Python', 'OpenCV', 'TensorFlow', 'Tkinter', 'CNNs'],
       visual: <FaceRecognitionVisual />,
       actions: [
-        { text: 'GitHub', variant: 'github', href: '#' },
+  { text: 'GitHub', variant: 'github', href: 'https://github.com/ShashankSakilam/FACE-RECOGNITION.git/' },
       ]
     },
     {
@@ -460,7 +445,7 @@ export default function InteractiveProjectsGrid() {
       technologies: ['Python', 'Gemini Pro', 'LangChain', 'FAISS', 'Streamlit'],
       visual: <RAGChatbotVisual />,
       actions: [
-        { text: 'GitHub', variant: 'github', href: '#' },
+  { text: 'GitHub', variant: 'github', href: 'https://github.com/ShashankSakilam/MULTI-PDF-RAG.git/' },
       ]
     }
   ]
@@ -524,18 +509,37 @@ export default function InteractiveProjectsGrid() {
                   {/* Action Buttons */}
                   <div className="flex gap-2 md:gap-3 mt-auto">
                     {project.actions.map((action, actionIndex) => (
-                      <motion.button
-                        key={actionIndex}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-medium text-xs md:text-sm transition-all duration-300 hover:shadow-lg touch-manipulation ${
-                          action.variant === 'live'
-                            ? 'bg-[#ADFF2F] hover:bg-[#9AE234] text-black hover:shadow-[#ADFF2F]/25'
-                            : 'bg-black hover:bg-gray-800 text-white'
-                        }`}
-                      >
-                        {action.text}
-                      </motion.button>
+                      action.href ? (
+                        <motion.a
+                          key={actionIndex}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          href={action.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-block px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-medium text-xs md:text-sm transition-all duration-300 hover:shadow-lg touch-manipulation ${
+                            action.variant === 'live'
+                              ? 'bg-[#ADFF2F] hover:bg-[#9AE234] text-black hover:shadow-[#ADFF2F]/25'
+                              : 'bg-black hover:bg-gray-800 text-white'
+                          }`}
+                        >
+                          {action.text}
+                        </motion.a>
+                      ) : (
+                        <motion.button
+                          key={actionIndex}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={action.onClick}
+                          className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-medium text-xs md:text-sm transition-all duration-300 hover:shadow-lg touch-manipulation ${
+                            action.variant === 'live'
+                              ? 'bg-[#ADFF2F] hover:bg-[#9AE234] text-black hover:shadow-[#ADFF2F]/25'
+                              : 'bg-black hover:bg-gray-800 text-white'
+                          }`}
+                        >
+                          {action.text}
+                        </motion.button>
+                      )
                     ))}
                   </div>
                 </CardBody>

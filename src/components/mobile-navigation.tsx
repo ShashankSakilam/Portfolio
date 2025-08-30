@@ -66,10 +66,10 @@ function MobileNavigationComponent() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 md:hidden">
+    <div className="fixed top-4 right-4 z-50 md:hidden">
       <div className="relative">
-        {/* Subtle glow effect */}
-        <div className="absolute inset-0 bg-[#ADFF2F]/20 blur-xl rounded-full scale-150 opacity-50" />
+        {/* Subtle glow effect - smaller on mobile so it doesn't push content */}
+        <div className="absolute inset-0 bg-[#ADFF2F]/20 blur-md rounded-full scale-100 opacity-60" />
 
         <MenuContainer>
           <MenuItem
