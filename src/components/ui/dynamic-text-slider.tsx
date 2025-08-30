@@ -42,40 +42,40 @@ function TitleComponent() {
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center text-center font-sans">
-      <div className="max-w-5xl">
+    <div className="w-full flex flex-col items-center justify-center text-center font-sans px-4">
+      <div className="max-w-5xl w-full">
         {/* Main heading with Shashank in blue */}
-        <h1 className="font-bold tracking-tighter text-5xl text-black md:text-7xl lg:text-8xl mb-8">
+        <h1 className="font-bold tracking-tighter text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-black mb-4 md:mb-6 lg:mb-8">
           Hey ! I am{" "}
           <span className="text-blue-500">Shashank</span>
         </h1>
-        
+
         {/* Hidden copy for width‑measurement. Font size must match the visible text in the slider. */}
         <span
           ref={measureRef}
-          className="absolute -left-[9999px] px-4 whitespace-nowrap font-bold tracking-tighter text-3xl text-black md:text-4xl lg:text-5xl"
+          className="absolute -left-[9999px] px-4 whitespace-nowrap font-bold tracking-tighter text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-black"
         >
           Stop Looking at me 😜 !
         </span>
-        
+
         {/* Range‑slider container */}
-        <div className="flex justify-center gap-4 mt-4 md:mt-6">
+        <div className="flex justify-center gap-2 sm:gap-4 mt-4 md:mt-6">
           <OpenSourceSlider width={textWidth} />
         </div>
 
         {/* Subheading */}
-        <p className="mt-8 text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto text-gray-600 font-medium">
+        <p className="mt-6 md:mt-8 text-lg sm:text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto text-gray-600 font-medium px-4">
           I am a{" "}
-          <a 
-            href="#projects" 
+          <a
+            href="#projects"
             className="relative inline-block font-semibold group text-black cursor-pointer"
           >
             Versatile Designer
             <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#ADFF2F] transition-all duration-300 group-hover:w-full"></span>
           </a>
           {" "}and an{" "}
-          <a 
-            href="#projects" 
+          <a
+            href="#projects"
             className="relative inline-block font-semibold group text-black cursor-pointer"
           >
             Engineer
@@ -94,8 +94,10 @@ function TitleComponent() {
  * Dragging is projected on to this rotated axis so the handles feel natural.
  */
 function OpenSourceSlider({ width: initialWidth, height = 70, handleSize = 28, onChange }: SliderProps) {
-  // Adjusted height to better accommodate larger text
+  // Adjusted height to better accommodate larger text - responsive height
   const width = initialWidth > 0 ? initialWidth + 35 : 0;
+  const responsiveHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 55 : height;
+  const responsiveHandleSize = typeof window !== 'undefined' && window.innerWidth < 640 ? 28 : handleSize;
   
   const [left, setLeft] = useState(width / 2 - 25);
   const [right, setRight] = useState(width / 2 + 25);
@@ -195,11 +197,11 @@ function OpenSourceSlider({ width: initialWidth, height = 70, handleSize = 28, o
   return (
     <div
       className="relative select-none transition-transform duration-300 ease-out"
-      style={{ width, height, transform: `rotate(${dynamicRotation}deg)` }}
+      style={{ width, height: responsiveHeight, transform: `rotate(${dynamicRotation}deg)` }}
     >
       <div className="absolute inset-0 rounded-2xl border-2 border-blue-500 pointer-events-none" />
       {(["left", "right"] as const).map((handle) => {
-        const x = handle === "left" ? left : right - handleSize;
+        const x = handle === "left" ? left : right - responsiveHandleSize;
         const scaleClass = draggingHandle === handle ? "scale-125" : "hover:scale-110";
 
         return (
@@ -209,8 +211,12 @@ function OpenSourceSlider({ width: initialWidth, height = 70, handleSize = 28, o
             aria-label={handle === "left" ? "Adjust start" : "Adjust end"}
             onPointerDown={(e) => startDrag(handle, e)}
             onKeyDown={nudgeHandle(handle)}
-            className={`z-20 absolute top-0 h-full w-7 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-150 ease-in-out opacity-100 shadow-md ${scaleClass}`}
-            style={{ left: x, touchAction: "none" }}
+            className={`z-20 absolute top-0 h-full rounded-full bg-white border-2 border-blue-500 flex items-center justify-center cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-150 ease-in-out opacity-100 shadow-md ${scaleClass}`}
+            style={{
+              left: x,
+              width: responsiveHandleSize,
+              touchAction: "none"
+            }}
           >
             <span className="w-1 h-8 rounded-full bg-blue-500" />
           </button>

@@ -46,7 +46,7 @@ const IconGrid = React.forwardRef<HTMLDivElement, IconGridProps>(
         initial="hidden"
         animate="visible"
         className={cn(
-          "grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-3",
+          "grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-2 md:gap-3",
           className
         )}
       >
@@ -57,7 +57,7 @@ const IconGrid = React.forwardRef<HTMLDivElement, IconGridProps>(
             className="group relative flex flex-col items-center justify-center"
             aria-label={item.name}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/5 p-2 transition-all duration-300 ease-in-out hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 border border-white/5 hover:border-white/20">
+            <div className="flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-lg bg-white/5 p-2 md:p-2 transition-all duration-300 ease-in-out hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 border border-white/5 hover:border-white/20 touch-manipulation">
               {item.icon}
             </div>
           </motion.div>

@@ -43,29 +43,29 @@ function DesignCodeCookComponent() {
 
   return (
     <div className="w-full flex flex-col items-center justify-center text-center font-sans">
-      <div className="max-w-lg">
+      <div className="max-w-lg w-full">
         {/* First line - Design with gradient */}
-        <h1 className="font-bold tracking-tighter text-6xl md:text-7xl lg:text-8xl mb-2">
+        <h1 className="font-bold tracking-tighter text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-1 md:mb-2">
           <span className="bg-gradient-to-r from-[#ADFF2F] to-cyan-400 bg-clip-text text-transparent">
             Design.
           </span>
         </h1>
         
         {/* Second line - Code in white */}
-        <h1 className="font-bold tracking-tighter text-6xl md:text-7xl lg:text-8xl text-white mb-2">
+        <h1 className="font-bold tracking-tighter text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-1 md:mb-2">
           Code.
         </h1>
-        
+
         {/* Hidden copy for width‑measurement for Cook!! */}
         <span
           ref={measureRef}
-          className="absolute -left-[9999px] px-4 whitespace-nowrap font-bold tracking-tighter text-4xl text-white md:text-5xl lg:text-6xl"
+          className="absolute -left-[9999px] px-4 whitespace-nowrap font-bold tracking-tighter text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white"
         >
           Cook!!
         </span>
-        
+
         {/* Third line - Cook!! with slider */}
-        <div className="flex justify-center gap-4 mt-4">
+        <div className="flex justify-center gap-2 sm:gap-4 mt-3 md:mt-4">
           <DesignSlider width={textWidth} />
         </div>
       </div>
@@ -78,6 +78,8 @@ function DesignCodeCookComponent() {
  */
 function DesignSlider({ width: initialWidth, height = 60, handleSize = 24, onChange }: SliderProps) {
   const width = initialWidth > 0 ? initialWidth + 30 : 0;
+  const responsiveHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 45 : height;
+  const responsiveHandleSize = typeof window !== 'undefined' && window.innerWidth < 640 ? 18 : handleSize;
   
   const [left, setLeft] = useState(0);
   const [right, setRight] = useState(width);
@@ -169,11 +171,11 @@ function DesignSlider({ width: initialWidth, height = 60, handleSize = 24, onCha
   return (
     <div
       className="relative select-none transition-transform duration-300 ease-out"
-      style={{ width, height, transform: `rotate(${dynamicRotation}deg)` }}
+      style={{ width, height: responsiveHeight, transform: `rotate(${dynamicRotation}deg)` }}
     >
       <div className="absolute inset-0 rounded-2xl border border-[#ADFF2F] pointer-events-none" />
       {(["left", "right"] as const).map((handle) => {
-        const x = handle === "left" ? left : right - handleSize;
+        const x = handle === "left" ? left : right - responsiveHandleSize;
         const scaleClass = draggingHandle === handle ? "scale-125" : "hover:scale-110";
 
         return (
@@ -183,8 +185,12 @@ function DesignSlider({ width: initialWidth, height = 60, handleSize = 24, onCha
             aria-label={handle === "left" ? "Adjust start" : "Adjust end"}
             onPointerDown={(e) => startDrag(handle, e)}
             onKeyDown={nudgeHandle(handle)}
-            className={`z-20 absolute top-0 h-full w-6 rounded-full bg-[#262626] border border-[#ADFF2F] flex items-center justify-center cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-[#ADFF2F] transition-transform duration-150 ease-in-out opacity-100 ${scaleClass}`}
-            style={{ left: x, touchAction: "none" }}
+            className={`z-20 absolute top-0 h-full rounded-full bg-[#262626] border border-[#ADFF2F] flex items-center justify-center cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-[#ADFF2F] transition-transform duration-150 ease-in-out opacity-100 ${scaleClass}`}
+            style={{
+              left: x,
+              width: responsiveHandleSize,
+              touchAction: "none"
+            }}
           >
             <span className="w-1 h-6 rounded-full bg-[#ADFF2F]" />
           </button>

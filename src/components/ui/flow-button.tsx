@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 
 export function FlowButton({ text = "Modern Button" }: { text?: string }) {
   return (
-    <button className="group relative flex items-center gap-1 overflow-hidden rounded-[100px] border-[1.5px] border-[#ADFF2F]/40 bg-transparent px-8 py-3 text-sm font-semibold text-black cursor-pointer transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-transparent hover:text-black hover:rounded-[12px] active:scale-[0.95] shadow-lg hover:shadow-xl hover:shadow-[#ADFF2F]/25">
+    <button className="group relative flex items-center gap-1 overflow-hidden rounded-[100px] border-[1.5px] border-[#ADFF2F]/40 bg-transparent px-6 md:px-8 py-3 md:py-3 text-sm font-semibold text-black cursor-pointer transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-transparent hover:text-black hover:rounded-[12px] active:scale-[0.95] shadow-lg hover:shadow-xl hover:shadow-[#ADFF2F]/25 touch-manipulation min-h-[48px]">
       {/* Left arrow (arr-2) */}
       <ArrowRight 
         className="absolute w-4 h-4 left-[-25%] stroke-black fill-none z-[9] group-hover:left-4 group-hover:stroke-black transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]" 

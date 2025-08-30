@@ -3,6 +3,41 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { GlassEffect, GlassFilter } from '@/components/ui/liquid-glass';
+import dynamic from 'next/dynamic';
+
+// Component to ensure page starts at top
+const ScrollToTop = dynamic(() => Promise.resolve(ScrollToTopComponent), {
+  ssr: false,
+  loading: () => null
+});
+
+function ScrollToTopComponent() {
+  useEffect(() => {
+    // Force scroll to top on mount
+    const scrollToTop = () => {
+      if (typeof window !== 'undefined') {
+        // Remove any hash from URL
+        if (window.location.hash) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
+    };
+
+    // Execute multiple times to handle different browser behaviors
+    scrollToTop();
+    const timeout1 = setTimeout(scrollToTop, 50);
+    const timeout2 = setTimeout(scrollToTop, 150);
+
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+    };
+  }, []);
+
+  return null;
+}
 
 export default function LiquidGlassNavbar() {
   const [activeSection, setActiveSection] = useState('Home');
@@ -17,10 +52,45 @@ export default function LiquidGlassNavbar() {
   ];
 
   useEffect(() => {
+    let hasUserScrolled = false;
+    let isInitialLoad = true;
+
+    // Force scroll to top on page load to ensure we start at Home
+    const scrollToTop = () => {
+      if (window.location.hash && window.location.hash !== '#hero') {
+        // If there's a hash that's not #hero, remove it and scroll to top
+        window.history.replaceState(null, '', window.location.pathname);
+        window.scrollTo(0, 0);
+      } else if (window.scrollY > 0 && isInitialLoad) {
+        // If page loaded with scroll position, scroll to top
+        window.scrollTo(0, 0);
+      }
+      isInitialLoad = false;
+    };
+
+    // Execute immediately and after a short delay to handle different browser behaviors
+    scrollToTop();
+    setTimeout(scrollToTop, 100);
+
     const handleScroll = () => {
+      // Mark that user has scrolled
+      if (window.scrollY > 10) {
+        hasUserScrolled = true;
+      }
+
       setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
+
+      // Always set to Home if at the very top and hasn't scrolled
+      if (window.scrollY === 0 && !hasUserScrolled) {
+        setActiveSection('Home');
+        return;
+      }
+
+      // Update active section based on scroll position only after user interaction
+      if (!hasUserScrolled) {
+        return;
+      }
+
       const sections = navItems.map(item => ({
         name: item.name,
         element: document.querySelector(item.href)
@@ -33,7 +103,7 @@ export default function LiquidGlassNavbar() {
         if (section.element) {
           const rect = section.element.getBoundingClientRect();
           const elementTop = rect.top + window.scrollY;
-          
+
           if (scrollPosition >= elementTop) {
             setActiveSection(section.name);
             break;
@@ -41,6 +111,9 @@ export default function LiquidGlassNavbar() {
         }
       }
     };
+
+    // Set initial state
+    setActiveSection('Home');
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -53,12 +126,13 @@ export default function LiquidGlassNavbar() {
 
   return (
     <>
+      <ScrollToTop />
       <GlassFilter />
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${
+        className={`hidden md:flex fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${
           isScrolled ? 'scale-95' : 'scale-100'
         }`}
       >

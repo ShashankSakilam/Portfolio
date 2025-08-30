@@ -207,22 +207,22 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section id="skills" className="py-24 px-6 bg-black">
+    <section id="skills" className="py-16 md:py-24 px-4 md:px-6 bg-black">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <p className="text-gray-400 text-sm font-medium mb-2">[03] — Skills & Expertise</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <p className="text-gray-400 text-xs md:text-sm font-medium mb-2">[03] — Skills & Expertise</p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 md:mb-4">
             My Creative Toolbox
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto px-2">
             A comprehensive collection of technologies, frameworks, and tools I use to bring ideas to life.
           </p>
         </motion.div>
@@ -243,17 +243,17 @@ export default function SkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-12 md:mt-16"
         >
-          <p className="text-gray-400 text-lg mb-6">
+          <p className="text-gray-400 text-base md:text-lg mb-4 md:mb-6 px-2">
             Want to see these skills in action?
           </p>
           <a
             href="#projects"
-            className="inline-flex items-center gap-3 bg-white text-black font-semibold px-8 py-4 rounded-full hover:bg-gray-200 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 md:gap-3 bg-white text-black font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full hover:bg-gray-200 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl touch-manipulation"
           >
-            View My Projects
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <span className="text-sm md:text-base">View My Projects</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="md:w-[20px] md:h-[20px]">
               <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </a>

@@ -90,3 +90,31 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Ensure touch targets are at least 44px */
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Prevent horizontal scroll on small screens */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Improve tap targets for better mobile experience */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Ensure proper text rendering on mobile */
+@media (max-width: 640px) {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
