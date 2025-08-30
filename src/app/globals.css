@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+}
+
+:root {
+  --electric-green: #ADFF2F;
+  --pure-white: #FFFFFF;
+  --pure-black: #000000;
+  --light-gray: #f5f5f5;
+  --dark-gray: #1a1a1a;
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply font-sans;
+    font-family: var(--font-manrope), system-ui, sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .electric-green {
+    background-color: var(--electric-green);
+  }
+  
+  .text-electric-green {
+    color: var(--electric-green);
+  }
+  
+  .border-electric-green {
+    border-color: var(--electric-green);
+  }
+  
+  .bg-electric-green {
+    background-color: var(--electric-green);
+  }
+}
+
+@layer components {
+  .electric-green {
+    @apply bg-[#ADFF2F];
+  }
+  
+  .text-electric-green {
+    @apply text-[#ADFF2F];
+  }
+  
+  .bg-electric-green {
+    @apply bg-[#ADFF2F];
+  }
+  
+  .border-electric-green {
+    @apply border-[#ADFF2F];
+  }
+}
+
+/* Liquid glass animations */
+@keyframes moveBackground {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% -1000%;
+  }
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
