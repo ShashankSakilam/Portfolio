@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { GlassEffect, GlassFilter } from '@/components/ui/liquid-glass';
 import dynamic from 'next/dynamic';
@@ -51,8 +51,10 @@ export default function LiquidGlassNavbar() {
     { name: 'Connect', href: '#contact' },
   ];
 
+  const hasUserScrolledRef = useRef(false);
+
   useEffect(() => {
-    let hasUserScrolled = false;
+    hasUserScrolledRef.current = false;
     let isInitialLoad = true;
 
     // Force scroll to top on page load to ensure we start at Home
@@ -73,21 +75,21 @@ export default function LiquidGlassNavbar() {
     setTimeout(scrollToTop, 100);
 
     const handleScroll = () => {
-      // Mark that user has scrolled
+      // Mark that user has scrolled (also set by programmatic nav clicks)
       if (window.scrollY > 10) {
-        hasUserScrolled = true;
+        hasUserScrolledRef.current = true;
       }
 
       setIsScrolled(window.scrollY > 50);
 
       // Always set to Home if at the very top and hasn't scrolled
-      if (window.scrollY === 0 && !hasUserScrolled) {
+      if (window.scrollY === 0 && !hasUserScrolledRef.current) {
         setActiveSection('Home');
         return;
       }
 
-      // Update active section based on scroll position only after user interaction
-      if (!hasUserScrolled) {
+      // Update active section based on scroll position only after user/programmatic interaction
+      if (!hasUserScrolledRef.current) {
         return;
       }
 
@@ -120,7 +122,10 @@ export default function LiquidGlassNavbar() {
   }, []);
 
   const handleNavClick = (item: typeof navItems[0]) => {
-    setActiveSection(item.name);
+    // mark that navigation happened (so scroll listener will update activeSection)
+    hasUserScrolledRef.current = true;
+
+    // Smoothly scroll to target; activeSection will be updated by scroll handler for a smooth pill animation
     document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -149,10 +154,11 @@ export default function LiquidGlassNavbar() {
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
+                  type="button"
                   onClick={() => handleNavClick(item)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`relative cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeSection === item.name
                       ? 'font-semibold'
                       : 'text-black/70 hover:text-black'
@@ -179,8 +185,9 @@ export default function LiquidGlassNavbar() {
                         }}
                         transition={{
                           type: "spring",
-                          stiffness: 500,
-                          damping: 30
+                          stiffness: 280,
+                          damping: 28,
+                          mass: 0.9
                         }}
                       />
                       {/* Pulsing glow effect */}
@@ -226,7 +233,7 @@ export default function LiquidGlassNavbar() {
           
           {/* Enhanced glow effect */}
           <div 
-            className="absolute inset-0 rounded-full opacity-30 blur-xl transition-all duration-500"
+            className="absolute inset-0 rounded-full opacity-30 blur-xl transition-all duration-500 pointer-events-none"
             style={{
               background: activeSection !== 'Home' 
                 ? 'linear-gradient(45deg, rgba(173, 255, 47, 0.4), rgba(173, 255, 47, 0.2), rgba(255, 255, 255, 0.2))'
@@ -240,7 +247,7 @@ export default function LiquidGlassNavbar() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="absolute inset-0 rounded-full opacity-20 blur-2xl"
+              className="absolute inset-0 rounded-full opacity-20 blur-2xl pointer-events-none"
               style={{
                 background: 'radial-gradient(circle, rgba(173, 255, 47, 0.6) 0%, transparent 70%)',
               }}

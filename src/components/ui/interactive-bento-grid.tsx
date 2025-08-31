@@ -143,8 +143,9 @@ const CreatorPulseVisual: React.FC<VisualProps> = ({
     { id: 6, translateX: -120, translateY: -60, text: "ShadCN UI", icon: "🎨" },
   ]
 
-  return (
+    return (
     <>
+      <div className="absolute inset-0 z-20 pointer-events-none" />
       <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
         {/* Writing Animation */}
         <div className="absolute inset-0 z-[6] flex items-center justify-center">
@@ -195,7 +196,7 @@ const CreatorPulseVisual: React.FC<VisualProps> = ({
 
         <EllipseGradient color={mainColor} />
         <GridLayer color={gridColor} />
-  </div>
+      </div>
     </>
   )
 }
@@ -218,7 +219,8 @@ const FaceRecognitionVisual: React.FC<VisualProps> = ({
 
   return (
     <>
-      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+  <div className="absolute inset-0 z-20 pointer-events-none" />
+  <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
         {/* Face with detection boxes */}
         <div className="absolute inset-0 z-[6] flex items-center justify-center">
           <div className="relative">
@@ -275,7 +277,7 @@ const FaceRecognitionVisual: React.FC<VisualProps> = ({
 
         <EllipseGradient color={mainColor} />
         <GridLayer color={gridColor} />
-  </div>
+      </div>
     </>
   )
 }
@@ -298,7 +300,8 @@ const RAGChatbotVisual: React.FC<VisualProps> = ({
 
   return (
     <>
-      <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+  <div className="absolute inset-0 z-20 pointer-events-none" />
+  <div className="relative h-[180px] md:h-[200px] w-full overflow-hidden rounded-t-xl md:rounded-t-2xl" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
         {/* Chat Interface */}
         <div className="absolute inset-0 z-[6] flex items-center justify-center">
           <div className="bg-white/90 dark:bg-black/90 rounded-lg p-3 md:p-4 w-full max-w-xs md:max-w-sm mx-2 md:mx-0 shadow-lg">
@@ -367,7 +370,7 @@ const RAGChatbotVisual: React.FC<VisualProps> = ({
 
         <EllipseGradient color={mainColor} />
         <GridLayer color={gridColor} />
-  </div>
+      </div>
     </>
   )
 }
@@ -517,7 +520,7 @@ export default function InteractiveProjectsGrid() {
                           href={action.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`inline-block px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-medium text-xs md:text-sm transition-all duration-300 hover:shadow-lg touch-manipulation ${
+                          className={`inline-block px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-medium text-xs md:text-sm transition-all duration-300 hover:shadow-lg touch-manipulation cursor-pointer z-50 ${
                             action.variant === 'live'
                               ? 'bg-[#ADFF2F] hover:bg-[#9AE234] text-black hover:shadow-[#ADFF2F]/25'
                               : 'bg-black hover:bg-gray-800 text-white'
