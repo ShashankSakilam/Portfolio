@@ -8,7 +8,7 @@ export default function Footer() {
 
   const socialLinks = [
     { name: 'LinkedIn', href: 'https://www.linkedin.com/in/shashank-sakilam-864a54259/', icon: <Linkedin className="w-5 h-5" />, color: 'hover:text-blue-500' },
-    { name: 'GitHub', href: 'https://github.com/shashank-sakilam', icon: <Github className="w-5 h-5" />, color: 'hover:text-gray-500' },
+    { name: 'GitHub', href: 'https://github.com/ShashankSakilam/', icon: <Github className="w-5 h-5" />, color: 'hover:text-gray-500' },
     { name: 'Email', href: 'mailto:shashanksakilam@gmail.com', icon: <Mail className="w-5 h-5" />, color: 'hover:text-red-500' },
     { name: 'Instagram', href: 'https://www.instagram.com/its_shashanksakilam/', icon: <Instagram className="w-5 h-5" />, color: 'hover:text-pink-500' },
   ];

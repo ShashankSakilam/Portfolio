@@ -19,7 +19,7 @@ export default function ContactSection() {
   const socialLinks = [
     { name: 'Email', href: 'mailto:shashanksakilam@gmail.com', icon: <Mail className="w-5 h-5" />, color: 'hover:text-red-500', value: 'shashanksakilam@gmail.com' },
     { name: 'LinkedIn', href: 'https://www.linkedin.com/in/shashank-sakilam-864a54259/', icon: <Linkedin className="w-5 h-5" />, color: 'hover:text-blue-500', value: 'Connect on LinkedIn' },
-    { name: 'GitHub', href: 'https://github.com/shashank-sakilam', icon: <Github className="w-5 h-5" />, color: 'hover:text-gray-500', value: 'View my code' },
+    { name: 'GitHub', href: 'https://github.com/ShashankSakilam/', icon: <Github className="w-5 h-5" />, color: 'hover:text-gray-500', value: 'View my code' },
   ];
 
   return (

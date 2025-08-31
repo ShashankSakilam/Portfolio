@@ -52,7 +52,7 @@ function MobileNavigationComponent() {
 
   // motion variants
   const dropdownVariants = {
-    hidden: { opacity: 0, scale: 0.98, transformOrigin: "top right" },
+    hidden: { opacity: 0, scale: 0.98, transformOrigin: "top left" },
     show: {
       opacity: 1,
       scale: 1,
@@ -81,14 +81,14 @@ function MobileNavigationComponent() {
   } as any
 
   return (
-    <div ref={containerRef} className="fixed top-4 left-4 z-50 md:hidden">
-      {/* Hamburger button (top-left) */}
+    <div ref={containerRef} className="fixed top-4 right-4 z-50 md:hidden">
+      {/* Hamburger button (top-right) */}
       <button
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
-        className="w-12 h-12 flex items-center justify-center rounded-full bg-lime-400 text-white focus:outline-none focus:ring-0"
+        className="w-12 h-12 flex items-center justify-center rounded-full bg-lime-400 text-white focus:outline-none focus:ring-0 cursor-pointer"
         style={{ boxShadow: '0 6px 6px rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.1)' }}
       >
         <span className="text-white" aria-hidden>
@@ -104,7 +104,7 @@ function MobileNavigationComponent() {
             animate="show"
             exit="hidden"
             variants={dropdownVariants}
-            className="mt-3 w-64 left-0 origin-top-left rounded-2xl bg-white/10 dark:bg-neutral-900/40 backdrop-blur-xl border border-white/8 overflow-hidden"
+            className="absolute mt-3 w-64 -right-4 origin-top-right rounded-2xl bg-white/10 dark:bg-neutral-900/40 backdrop-blur-xl border border-white/8 overflow-hidden"
             style={{ boxShadow: '0 0 30px rgba(132,255,120,0.12), inset 0 0 6px rgba(132,255,120,0.04)' }}
           >
             {/* optional gooey filter svg (applied to menu items if needed) */}
@@ -121,11 +121,10 @@ function MobileNavigationComponent() {
                 <motion.li key={item.id} variants={itemVariants} className="mb-2 last:mb-0">
                   <button
                     onClick={() => handleNavClick(item.id)}
-                    className="w-full text-left px-4 py-3 rounded-full bg-white/3 backdrop-blur-sm border border-white/6 text-white flex items-center justify-between hover:text-lime-400 hover:scale-105 transform transition-all duration-200"
+                    className="w-full text-left px-4 py-3 rounded-full bg-white/3 backdrop-blur-sm border border-white/6 text-white hover:text-lime-400 hover:scale-105 transform transition-all duration-200"
                     aria-label={`Go to ${item.name}`}
                   >
                     <span className="text-sm font-medium">{item.name}</span>
-                    <span className="text-xs opacity-60">→</span>
                   </button>
                 </motion.li>
               ))}
