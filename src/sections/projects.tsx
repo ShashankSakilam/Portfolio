@@ -97,11 +97,12 @@ export default function ProjectsSection() {
               {/* Main Folder Container */}
               <div
                 className="group cursor-pointer"
-                onMouseEnter={() => setHoveredFolder(project.id)}
-                onMouseLeave={() => setHoveredFolder(null)}
-                onClick={() => {
-                  // For mobile: toggle popup on click if not already hovered
-                  if (window.innerWidth < 768) {
+                onMouseEnter={() => !isMobile && setHoveredFolder(project.id)}
+                onMouseLeave={() => !isMobile && setHoveredFolder(null)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // For mobile: toggle popup on click
+                  if (isMobile) {
                     setHoveredFolder(hoveredFolder === project.id ? null : project.id);
                   }
                 }}
