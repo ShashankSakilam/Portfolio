@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { TextRotate } from "./text-rotate";
 
 /**
  * Slider constants
@@ -45,7 +46,7 @@ function TitleComponent() {
     <div className="w-full flex flex-col items-center justify-center text-center font-sans px-4">
       <div className="max-w-5xl w-full">
         {/* Main heading with Shashank in blue */}
-        <h1 className="font-bold tracking-tighter text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-black mb-4 md:mb-6 lg:mb-8">
+        <h1 className="font-bold tracking-tighter text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-black mb-2 md:mb-6 lg:mb-8">
           Hey ! I am{" "}
           <span className="text-blue-500">Shashank</span>
         </h1>
@@ -58,13 +59,18 @@ function TitleComponent() {
           Stop Looking at me 😜 !
         </span>
 
-        {/* Range‑slider container */}
-        <div className="flex justify-center gap-2 sm:gap-4 mt-4 md:mt-6">
+        {/* Desktop Slider - Hidden on mobile */}
+        <div className="hidden md:flex justify-center gap-2 sm:gap-4 mt-4 md:mt-6">
           <OpenSourceSlider width={textWidth} />
         </div>
 
+        {/* Mobile Animated Text */}
+        <div className="flex md:hidden justify-center mt-2 md:mt-6">
+          <MobileAnimatedText />
+        </div>
+
         {/* Subheading */}
-        <p className="mt-6 md:mt-8 text-lg sm:text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto text-gray-600 font-medium px-4">
+        <p className="mt-4 md:mt-8 text-lg sm:text-xl md:text-2xl lg:text-3xl max-w-3xl mx-auto text-gray-600 font-medium px-4">
           I am a{" "}
           <a
             href="#projects"
@@ -96,8 +102,16 @@ function TitleComponent() {
 function OpenSourceSlider({ width: initialWidth, height = 70, handleSize = 28, onChange }: SliderProps) {
   // Adjusted height to better accommodate larger text - responsive height
   const width = initialWidth > 0 ? initialWidth + 35 : 0;
-  const responsiveHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 55 : height;
-  const responsiveHandleSize = typeof window !== 'undefined' && window.innerWidth < 640 ? 28 : handleSize;
+
+  // Use useState to prevent hydration mismatch
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 640);
+  }, []);
+
+  const responsiveHeight = isMobile ? 55 : height;
+  const responsiveHandleSize = isMobile ? 28 : handleSize;
   
   const [left, setLeft] = useState(width / 2 - 25);
   const [right, setRight] = useState(width / 2 + 25);
@@ -228,6 +242,29 @@ function OpenSourceSlider({ width: initialWidth, height = 70, handleSize = 28, o
         style={{ clipPath: `inset(0 ${width - right}px 0 ${left}px round 1rem)` }}
       >
         Stop Looking at me 😜 !
+      </div>
+    </div>
+  );
+}
+
+// Mobile Animated Text Component
+function MobileAnimatedText() {
+  return (
+    <div className="flex flex-col items-center justify-center font-light overflow-hidden p-3 space-y-2">
+      <span className="text-2xl sm:text-3xl md:text-5xl font-light text-black">into</span>
+      <div className="w-full max-w-xs sm:max-w-sm">
+        <TextRotate
+          texts={["Vision", "Code", "Chaos"]}
+          mainClassName="px-6 py-4 bg-[#ADFF2F] overflow-hidden justify-center rounded-xl font-bold text-2xl sm:text-3xl md:text-4xl"
+          staggerFrom={"last"}
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "-120%" }}
+          staggerDuration={0.025}
+          splitLevelClassName="overflow-hidden pb-1"
+          transition={{ type: "spring", damping: 30, stiffness: 400 }}
+          rotationInterval={2000}
+        />
       </div>
     </div>
   );

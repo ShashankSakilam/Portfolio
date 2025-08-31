@@ -1,24 +1,20 @@
 @import "tailwindcss";
 
-@theme inline {
-  --font-sans: var(--font-manrope);
-}
-
 :root {
   --electric-green: #ADFF2F;
   --pure-white: #FFFFFF;
   --pure-black: #000000;
   --light-gray: #f5f5f5;
   --dark-gray: #1a1a1a;
+  --font-sans: var(--font-manrope);
 }
 
 @layer base {
   * {
-    @apply border-gray-200;
+    border-color: #e5e7eb; /* equivalent to Tailwind border-gray-200 */
   }
   
   body {
-    @apply font-sans;
     font-family: var(--font-manrope), system-ui, sans-serif;
   }
   
@@ -47,19 +43,19 @@
 
 @layer components {
   .electric-green {
-    @apply bg-[#ADFF2F];
+    background-color: #ADFF2F;
   }
   
   .text-electric-green {
-    @apply text-[#ADFF2F];
+    color: #ADFF2F;
   }
   
   .bg-electric-green {
-    @apply bg-[#ADFF2F];
+    background-color: #ADFF2F;
   }
   
   .border-electric-green {
-    @apply border-[#ADFF2F];
+    border-color: #ADFF2F;
   }
 }
 

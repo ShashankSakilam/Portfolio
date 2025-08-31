@@ -12,17 +12,23 @@ const ScrollToTop = dynamic(() => Promise.resolve(ScrollToTopComponent), {
 });
 
 function ScrollToTopComponent() {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     // Force scroll to top on mount
     const scrollToTop = () => {
-      if (typeof window !== 'undefined') {
-        // Remove any hash from URL
-        if (window.location.hash) {
-          window.history.replaceState(null, '', window.location.pathname + window.location.search);
-        }
-        // Scroll to top
-        window.scrollTo(0, 0);
+      // Remove any hash from URL
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
       }
+      // Scroll to top
+      window.scrollTo(0, 0);
     };
 
     // Execute multiple times to handle different browser behaviors
@@ -34,7 +40,7 @@ function ScrollToTopComponent() {
       clearTimeout(timeout1);
       clearTimeout(timeout2);
     };
-  }, []);
+  }, [mounted]);
 
   return null;
 }

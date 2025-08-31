@@ -1,12 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ProjectsSection() {
   const [hoveredFolder, setHoveredFolder] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const projects = [
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const baseProjects = [
     {
       id: 'genai-development',
       title: 'Gen AI & Development',
@@ -41,6 +49,18 @@ export default function ProjectsSection() {
       ]
     }
   ];
+
+  // Filter cards for mobile - only show Creator Pulse for Gen AI folder
+  const projects = baseProjects.map(project => {
+    if (project.id === 'genai-development' && isMobile) {
+      return {
+        ...project,
+        subtitle: '1 Featured Project', // Update subtitle for mobile
+        cards: [project.cards[0]] // Only keep the first card (Creator Pulse)
+      };
+    }
+    return project;
+  });
 
   return (
     <section id="projects" className="py-16 md:py-24 px-4 md:px-6 bg-white">

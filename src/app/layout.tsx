@@ -11,7 +11,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Modern Web Developer",
+  title: "Shashank Sakilam",
   description: "A modern portfolio showcasing web development skills with Next.js, TypeScript, and cutting-edge UI libraries",
 };
 

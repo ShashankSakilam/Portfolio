@@ -45,28 +45,35 @@ function DesignCodeCookComponent() {
     <div className="w-full flex flex-col items-center justify-center text-center font-sans">
       <div className="max-w-lg w-full">
         {/* First line - Design with gradient */}
-        <h1 className="font-bold tracking-tighter text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-1 md:mb-2">
+        <h1 className="font-bold tracking-tighter text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-2 md:mb-3">
           <span className="bg-gradient-to-r from-[#ADFF2F] to-cyan-400 bg-clip-text text-transparent">
             Design.
           </span>
         </h1>
-        
+
         {/* Second line - Code in white */}
-        <h1 className="font-bold tracking-tighter text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-1 md:mb-2">
+        <h1 className="font-bold tracking-tighter text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-2 md:mb-3">
           Code.
         </h1>
 
-        {/* Hidden copy for width‑measurement for Cook!! */}
+        {/* Hidden copy for width‑measurement for Cook ! */}
         <span
           ref={measureRef}
           className="absolute -left-[9999px] px-4 whitespace-nowrap font-bold tracking-tighter text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white"
         >
-          Cook!!
+          Cook !
         </span>
 
-        {/* Third line - Cook!! with slider */}
-        <div className="flex justify-center gap-2 sm:gap-4 mt-3 md:mt-4">
+        {/* Desktop: Cook!! with slider - Hidden on mobile */}
+        <div className="hidden md:flex justify-center gap-2 sm:gap-4 mt-3 md:mt-4">
           <DesignSlider width={textWidth} />
+        </div>
+
+        {/* Mobile: Static Cook ! text - Hidden on desktop */}
+        <div className="flex md:hidden justify-center mt-3 md:mt-4">
+          <h1 className="font-bold tracking-tighter text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-2 md:mb-3">
+            Cook !
+          </h1>
         </div>
       </div>
     </div>
@@ -78,8 +85,16 @@ function DesignCodeCookComponent() {
  */
 function DesignSlider({ width: initialWidth, height = 60, handleSize = 24, onChange }: SliderProps) {
   const width = initialWidth > 0 ? initialWidth + 30 : 0;
-  const responsiveHeight = typeof window !== 'undefined' && window.innerWidth < 640 ? 45 : height;
-  const responsiveHandleSize = typeof window !== 'undefined' && window.innerWidth < 640 ? 18 : handleSize;
+
+  // Use useState to prevent hydration mismatch
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 640);
+  }, []);
+
+  const responsiveHeight = isMobile ? 45 : height;
+  const responsiveHandleSize = isMobile ? 18 : handleSize;
   
   const [left, setLeft] = useState(0);
   const [right, setRight] = useState(width);
@@ -197,12 +212,12 @@ function DesignSlider({ width: initialWidth, height = 60, handleSize = 24, onCha
         );
       })}
       
-      {/* The "Cook!!" text that gets revealed */}
+      {/* The "Cook !" text that gets revealed */}
       <div
         className="flex z-10 items-center justify-center w-full h-full px-4 overflow-hidden pointer-events-none font-bold tracking-tighter text-4xl text-white md:text-5xl lg:text-6xl"
         style={{ clipPath: `inset(0 ${width - right}px 0 ${left}px round 1rem)` }}
       >
-        Cook!!
+        Cook !
       </div>
     </div>
   );

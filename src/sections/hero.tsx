@@ -6,9 +6,9 @@ import TitleComponent from '@/components/ui/dynamic-text-slider';
 
 export default function HeroSection() {
   return (
-    <section id="hero" className="min-h-screen bg-white pt-24 pb-12 px-4 md:pt-32 md:pb-20 md:px-6">
+    <section id="hero" className="min-h-screen bg-white pt-20 pb-8 px-4 md:pt-32 md:pb-20 md:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center min-h-[70vh] md:min-h-[80vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-16 items-center min-h-[65vh] md:min-h-[80vh]">
 
           {/* Left side - Dynamic text slider */}
           <motion.div
