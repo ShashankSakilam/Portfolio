@@ -81,14 +81,14 @@ function MobileNavigationComponent() {
   } as any
 
   return (
-    <div ref={containerRef} className="fixed top-4 right-4 z-50 md:hidden">
+    <div ref={containerRef} className="fixed top-4 right-6 z-[100] md:hidden">
       {/* Hamburger button (top-right) */}
       <button
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
-        className="w-12 h-12 flex items-center justify-center rounded-full bg-lime-400 text-white focus:outline-none focus:ring-0 cursor-pointer"
+        className="w-12 h-12 flex items-center justify-center rounded-full bg-lime-400 text-white focus:outline-none focus:ring-0 cursor-pointer z-[101]"
         style={{ boxShadow: '0 6px 6px rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.1)' }}
       >
         <span className="text-white" aria-hidden>
@@ -104,7 +104,7 @@ function MobileNavigationComponent() {
             animate="show"
             exit="hidden"
             variants={dropdownVariants}
-            className="absolute mt-3 w-64 -right-4 origin-top-right rounded-2xl bg-white/10 dark:bg-neutral-900/40 backdrop-blur-xl border border-white/8 overflow-hidden"
+            className="absolute mt-3 w-64 right-0 origin-top-right rounded-2xl bg-white/10 dark:bg-neutral-900/40 backdrop-blur-xl border border-white/8 overflow-hidden"
             style={{ boxShadow: '0 0 30px rgba(132,255,120,0.12), inset 0 0 6px rgba(132,255,120,0.04)' }}
           >
             {/* optional gooey filter svg (applied to menu items if needed) */}
